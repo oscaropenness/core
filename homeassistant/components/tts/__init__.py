@@ -336,7 +336,10 @@ class SpeechManager:
             raise HomeAssistantError(f"No TTS from {engine} for '{message}'")
 
         # Create file infos
-        filename = f"{key}.{extension}".lower()
+        if extension.upper() == "WAVE_FILE":
+            filename = f"{key}.wav".lower()
+        else:
+            filename = f"{key}.{extension}".lower()
 
         data = self.write_tags(filename, data, provider, message, language, options)
 
